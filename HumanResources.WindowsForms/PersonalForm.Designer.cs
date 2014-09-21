@@ -33,11 +33,11 @@
             this.newEmployeeButton = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.employeesGrid = new System.Windows.Forms.DataGridView();
+            this.personalBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.employeeCodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lastNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.firstNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.personalBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.employeesGrid)).BeginInit();
@@ -50,7 +50,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(656, 51);
+            this.panel1.Size = new System.Drawing.Size(763, 51);
             this.panel1.TabIndex = 0;
             // 
             // newEmployeeButton
@@ -69,7 +69,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 51);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(656, 283);
+            this.panel2.Size = new System.Drawing.Size(763, 283);
             this.panel2.TabIndex = 1;
             // 
             // employeesGrid
@@ -87,9 +87,14 @@
             this.employeesGrid.Name = "employeesGrid";
             this.employeesGrid.ReadOnly = true;
             this.employeesGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.employeesGrid.Size = new System.Drawing.Size(656, 283);
+            this.employeesGrid.Size = new System.Drawing.Size(763, 283);
             this.employeesGrid.TabIndex = 0;
             this.employeesGrid.DoubleClick += new System.EventHandler(this.employeesGrid_DoubleClick);
+            // 
+            // personalBindingSource
+            // 
+            this.personalBindingSource.AllowNew = false;
+            this.personalBindingSource.DataSource = typeof(HumanResources.Entities.EmployeeMinimal);
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -122,16 +127,11 @@
             this.firstNameDataGridViewTextBoxColumn.ReadOnly = true;
             this.firstNameDataGridViewTextBoxColumn.Width = 200;
             // 
-            // personalBindingSource
-            // 
-            this.personalBindingSource.AllowNew = false;
-            this.personalBindingSource.DataSource = typeof(HumanResources.Entities.EmployeeMinimal);
-            // 
             // PersonalForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(656, 334);
+            this.ClientSize = new System.Drawing.Size(763, 334);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "PersonalForm";
