@@ -32,27 +32,16 @@ namespace HumanResources.WindowsForms
             this.employeeId = id;
         }
 
-        void ShowEmployee()
-        {
-            this.ShowEntity(this.employee);
-        }
-
-        void UpdateEmployee()
-        {
-            this.UpdateEntityFromControls(this.employee);
-        }
-
-
         private void EditEmployeeForm_Load(object sender, EventArgs e)
         {
             if (employeeId == 0) this.employee = new Employee();
             else employee = repository.Get(employeeId);
-            ShowEmployee();
+            this.ShowEntity(this.employee);
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            UpdateEmployee();
+            this.UpdateEntityFromControls(this.employee);
             var validationResults = employee.Validate();
             if (validationResults.IsValid)
             {
@@ -60,26 +49,16 @@ namespace HumanResources.WindowsForms
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
-            ShowErrors(validationResults);
+            this.ShowErrors(this.errorProvider, typeof(Employee), validationResults);
         }
 
-        void ShowErrors(ValidationResult validationResults)
-        {
-            foreach (var pi in typeof(Employee).GetProperties())
-            {
-                var controlProperty = this.GetType().GetField(pi.Name + "Control", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-                if (controlProperty != null)
-                {
-                    this.errorProvider.SetError((Control)controlProperty.GetValue(this), 
-                        string.Join(", ", validationResults.Errors.Where(x => x.PropertyName == pi.Name)
-                        .Select(x => x.ErrorMessage)));
-                }
-            }
-        }
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
-            this.repository.Reload(this.employee);
+            if (this.employee.Id != 0)
+            {
+                this.repository.Reload(this.employee);
+            }
             this.Close();
         }
     }

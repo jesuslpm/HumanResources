@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FluentValidation.Results;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -65,6 +66,20 @@ namespace HumanResources.WindowsForms
                     {
                         control.Text = Convert.ToString(propertyValue);
                     }
+                }
+            }
+        }
+
+        public static void ShowErrors(this Control container, ErrorProvider errorProvider, Type entityType, ValidationResult validationResults)
+        {
+            foreach (var pi in entityType.GetProperties())
+            {
+                var controlProperty = container.GetType().GetField(pi.Name + "Control", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+                if (controlProperty != null)
+                {
+                    errorProvider.SetError((Control)controlProperty.GetValue(container),
+                        string.Join(", ", validationResults.Errors.Where(x => x.PropertyName == pi.Name)
+                        .Select(x => x.ErrorMessage)));
                 }
             }
         }
