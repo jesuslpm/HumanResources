@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HumanResources.Repositories
 {
-    public abstract class Repository<T>: IRepository<T> where T: class, IEntity
+    internal abstract class Repository<T>: IRepository<T> where T: class, IEntity
     {
         protected readonly DbContext context;
 
