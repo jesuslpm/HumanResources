@@ -13,5 +13,7 @@ namespace HumanResources.Repositories
         void Save(T entity);
         bool Exists(int id);
         void Reload(T entity);
+        void Delete(T entity);
+        void Delete(int id);
     }
 }

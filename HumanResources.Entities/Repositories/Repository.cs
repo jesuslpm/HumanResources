@@ -20,7 +20,7 @@ namespace HumanResources.Repositories
 
         public T Get(int id)
         {
-            return this.context.Set<T>().Where( x => x.Id == id).FirstOrDefault();
+            return this.context.Set<T>().Find(id);
         }
 
         public void Save(T entity)
@@ -57,5 +57,22 @@ namespace HumanResources.Repositories
         {
             this.context.Entry(entity).Reload();
         }
+
+        public void Delete(T entity)
+        {
+            this.context.Set<T>().Remove(entity);
+            this.context.SaveChanges();
+        }
+
+        public void Delete(int id)
+        {
+            var entity = this.context.Set<T>().Find(id);
+            if (entity != null)
+            {
+                Delete(entity);
+            }
+        }
+
+
     }
 }
